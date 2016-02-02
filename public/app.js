@@ -11,8 +11,6 @@ window.onload = function(){
       var jsonParse = JSON.parse(request.responseText);
       console.log(jsonParse);
 
-      
-      
   }
 }
 
