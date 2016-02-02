@@ -8,11 +8,19 @@ window.onload = function(){
   request.onload = function(){
     if(request.status === 200){
       console.log("got the data");
-      var jsonParse = JSON.parse(request.responseText);
-      console.log(jsonParse);
+      var countries = JSON.parse(request.responseText);
+      console.log(countries);
 
+      var selectElement = document.querySelector("select");
+
+      for (var i = 0; i < countries.length; i++) {
+        var option = document.createElement("option");
+        option.value = [i];
+        option.innerText = countries[i].name;
+        selectElement.appendChild(option);
+      }
+    }
   }
-}
 
 request.send(null);
 
