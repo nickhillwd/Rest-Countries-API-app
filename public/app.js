@@ -7,12 +7,12 @@ window.onload = function(){
 
   request.onload = function(){
     if(request.status === 200){
-  console.log("got the data");
-  console.log(request.responseText);
-  var jsonParse = JSON.parse(request.responseText);
-  console.log(jsonParse);
-  var firstJson = jsonParse[0];
-  console.log("Name of first country:",firstJson.name);
+      console.log("got the data");
+      var jsonParse = JSON.parse(request.responseText);
+      console.log(jsonParse);
+
+      
+      
   }
 }
 
