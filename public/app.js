@@ -4,6 +4,7 @@ window.onload = function(){
   var request = new XMLHttpRequest();
   var selectElement = document.querySelector("select");
   var countries = undefined;
+  var timeOffset = 0;
 
   request.open('GET', url);
 
@@ -30,8 +31,23 @@ window.onload = function(){
     document.getElementById("capital").innerText = country.capital;
     document.getElementById("pop").innerText = country.population;
     document.getElementById("time").innerText = Date.now();
+
+    if(!isNaN(parseInt(country.timezones[0].substr(3,5)))){
+      timeOffset = parseInt(country.timezones[0].substr(3,5));
+    }else{
+      timeOffset = 0;
+    }
   }
 
-request.send(null);
+  request.send(null);
+
+  var updateTime = function(){
+    var time = new Date(Date.now());
+    time.setTime(time.getTime() + (timeOffset*60*60*1000));
+
+    document.getElementById("time").innerText = time.toLocaleString();
+  }
+
+  window.setInterval(updateTime, 1000);
 
 };
