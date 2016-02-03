@@ -29,7 +29,7 @@ window.onload = function(){
     document.getElementById("name").innerText = country.name;
     document.getElementById("capital").innerText = country.capital;
     document.getElementById("pop").innerText = country.population;
-    document.getElementById("time").innerText = 0;
+    document.getElementById("time").innerText = Date.now();
   }
 
 request.send(null);
