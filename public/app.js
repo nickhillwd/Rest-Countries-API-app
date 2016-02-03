@@ -5,6 +5,9 @@ window.onload = function(){
   var selectElement = document.querySelector("select");
   var countries = undefined;
   var timeOffset = 0;
+  var centre = {lat: 40.712784, lng: -74.005941};
+  var zoom = 2;
+  var map = new Map(centre, zoom);
 
   request.open('GET', url);
 
@@ -31,6 +34,9 @@ window.onload = function(){
     document.getElementById("capital").innerText = country.capital;
     document.getElementById("pop").innerText = country.population;
     document.getElementById("time").innerText = Date.now();
+    console.log(country);
+    latLng = {lat: country.latlng[0], lng:country.latlng[1]};
+    map.addMarker(latLng);
 
     if(!isNaN(parseInt(country.timezones[0].substr(3,5)))){
       timeOffset = parseInt(country.timezones[0].substr(3,5));
@@ -39,8 +45,6 @@ window.onload = function(){
     }
   }
 
-  request.send(null);
-
   var updateTime = function(){
     var time = new Date(Date.now());
     time.setTime(time.getTime() + (timeOffset*60*60*1000));
@@ -48,6 +52,7 @@ window.onload = function(){
     document.getElementById("time").innerText = time.toLocaleString();
   }
 
+  request.send(null);
   window.setInterval(updateTime, 1000);
 
 };
